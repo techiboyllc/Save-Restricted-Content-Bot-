@@ -4,30 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Save Restricted Content — User Declaration</title>
+  <title>Save Restricted Content</title>
 
   <meta
     name="description"
-    content="Save Restricted Content — Responsible Use and User Declaration"
+    content="Save Restricted Content — Responsible Use & User Declaration"
   >
 
   <style>
+    /* =========================
+       RESET
+    ========================= */
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    :root {
-      --bg: #07080d;
-      --glass: rgba(255, 255, 255, 0.075);
-      --glass-strong: rgba(255, 255, 255, 0.11);
-      --border: rgba(255, 255, 255, 0.16);
-      --text: #f7f7fa;
-      --muted: #a7a9b5;
-      --accent: #8b5cf6;
-      --accent-2: #ec4899;
-      --green: #34d399;
+      box-sizing: border-box;
     }
 
     html {
@@ -36,146 +28,191 @@
 
     body {
       min-height: 100vh;
+      color: #f5f5f7;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "SF Pro Display",
+        "SF Pro Text",
         "Segoe UI",
         Roboto,
+        Helvetica,
+        Arial,
         sans-serif;
 
-      color: var(--text);
       background:
-        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, .22), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(236, 72, 153, .18), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(59, 130, 246, .15), transparent 35%),
-        var(--bg);
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(120, 90, 255, 0.20),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(0, 180, 255, 0.14),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 80, 160, 0.12),
+          transparent 35%
+        ),
+        #07080c;
 
       overflow-x: hidden;
     }
 
-    /* Animated ambient lights */
-    .orb {
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .background {
       position: fixed;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: .35;
+      inset: 0;
+      overflow: hidden;
       pointer-events: none;
       z-index: -1;
-      animation: float 12s ease-in-out infinite alternate;
     }
 
-    .orb.one {
-      background: #8b5cf6;
-      top: 5%;
+    .glow {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.25;
+    }
+
+    .glow-1 {
+      top: -120px;
       left: -100px;
+      background: #7657ff;
     }
 
-    .orb.two {
-      background: #ec4899;
-      right: -100px;
+    .glow-2 {
       top: 35%;
-      animation-delay: -4s;
+      right: -150px;
+      background: #168cff;
     }
 
-    .orb.three {
-      background: #2563eb;
-      bottom: -100px;
-      left: 40%;
-      animation-delay: -8s;
+    .glow-3 {
+      bottom: -180px;
+      left: 35%;
+      background: #ec4899;
     }
 
-    @keyframes float {
-      from {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      to {
-        transform: translate3d(30px, -40px, 0) scale(1.12);
-      }
-    }
 
-    .page {
-      width: min(1100px, calc(100% - 32px));
+    /* =========================
+       MAIN CONTAINER
+    ========================= */
+
+    .container {
+      width: min(900px, calc(100% - 32px));
       margin: auto;
-      padding: 60px 0;
+      padding: 55px 0 35px;
     }
 
-    /* Glass */
+
+    /* =========================
+       GLASS EFFECT
+    ========================= */
+
     .glass {
-      background: var(--glass);
-      border: 1px solid var(--border);
-      box-shadow:
-        0 25px 80px rgba(0, 0, 0, .35),
-        inset 0 1px 0 rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, 0.055);
 
-      backdrop-filter: blur(24px) saturate(140%);
-      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+      backdrop-filter: blur(30px) saturate(140%);
+      -webkit-backdrop-filter: blur(30px) saturate(140%);
     }
+
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       position: relative;
-      overflow: hidden;
-      border-radius: 32px;
-      padding: 55px 45px;
+      padding: 55px 30px;
       text-align: center;
+
+      border-radius: 32px;
+
+      overflow: hidden;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
+
       position: absolute;
       inset: 0;
+
       background:
         linear-gradient(
           135deg,
-          rgba(255,255,255,.10),
-          transparent 35%,
-          rgba(255,255,255,.03)
+          rgba(255,255,255,0.08),
+          transparent 45%,
+          rgba(255,255,255,0.025)
         );
+
       pointer-events: none;
     }
+
+
+    /* =========================
+       LOGO
+    ========================= */
 
     .logo {
       width: 82px;
       height: 82px;
+
       margin: 0 auto 24px;
 
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      border-radius: 24px;
+      border-radius: 25px;
 
-      font-size: 40px;
+      font-size: 38px;
 
       background:
         linear-gradient(
-          135deg,
-          rgba(139,92,246,.35),
-          rgba(236,72,153,.25)
+          145deg,
+          rgba(255,255,255,0.16),
+          rgba(255,255,255,0.035)
         );
 
-      border: 1px solid rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,0.18);
 
       box-shadow:
-        0 15px 45px rgba(139,92,246,.25),
-        inset 0 1px 0 rgba(255,255,255,.2);
+        0 18px 50px rgba(0,0,0,0.35),
+        inset 0 1px 1px rgba(255,255,255,0.2);
     }
+
+
+    /* =========================
+       TITLE
+    ========================= */
 
     h1 {
-      font-size: clamp(32px, 6vw, 58px);
-      letter-spacing: -2px;
+      font-size: clamp(34px, 7vw, 58px);
+      font-weight: 700;
+      letter-spacing: -2.5px;
       line-height: 1.05;
-      margin-bottom: 18px;
-    }
 
-    .gradient-text {
       background:
         linear-gradient(
           90deg,
-          #ffffff,
-          #c4b5fd,
-          #f9a8d4
+          #ffffff 0%,
+          #dcd7ff 45%,
+          #b9b2ff 100%
         );
 
       -webkit-background-clip: text;
@@ -184,249 +221,379 @@
     }
 
     .subtitle {
-      max-width: 700px;
-      margin: auto;
-      color: var(--muted);
-      font-size: 17px;
+      max-width: 620px;
+
+      margin: 18px auto 0;
+
+      color: #a6a8b4;
+
+      font-size: 16px;
       line-height: 1.7;
     }
 
-    .badge {
+
+    /* =========================
+       STATUS BADGE
+    ========================= */
+
+    .status {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
 
-      margin-top: 28px;
+      margin-top: 25px;
       padding: 9px 15px;
 
       border-radius: 999px;
 
-      font-size: 13px;
-      color: #d1fae5;
+      color: #c9c9d2;
 
-      background: rgba(52, 211, 153, .08);
-      border: 1px solid rgba(52, 211, 153, .2);
+      font-size: 13px;
+
+      background: rgba(255,255,255,0.055);
+
+      border: 1px solid rgba(255,255,255,0.11);
     }
 
-    .dot {
+    .status-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 12px var(--green);
+
+      background: #45d483;
+
+      box-shadow:
+        0 0 10px rgba(69,212,131,0.7);
     }
+
+
+    /* =========================
+       CONTENT
+    ========================= */
 
     .content {
-      margin-top: 22px;
       display: grid;
-      gap: 18px;
+      gap: 16px;
+
+      margin-top: 18px;
     }
 
+
+    /* =========================
+       CARD
+    ========================= */
+
     .card {
-      border-radius: 24px;
       padding: 30px;
+
+      border-radius: 25px;
+
       transition:
-        transform .3s ease,
-        background .3s ease,
-        border-color .3s ease;
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      background: var(--glass-strong);
-      border-color: rgba(255,255,255,.23);
+      transform: translateY(-2px);
+
+      background: rgba(255,255,255,0.075);
+
+      border-color: rgba(255,255,255,0.18);
     }
 
-    .card-header {
+
+    /* =========================
+       CARD HEADER
+    ========================= */
+
+    .card-title {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 17px;
+
+      margin-bottom: 18px;
     }
 
     .icon {
-      width: 43px;
-      height: 43px;
+      width: 44px;
+      height: 44px;
 
-      display: grid;
-      place-items: center;
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       border-radius: 14px;
 
-      background: rgba(139,92,246,.12);
-      border: 1px solid rgba(139,92,246,.2);
+      font-size: 19px;
 
-      font-size: 20px;
-      flex-shrink: 0;
+      background: rgba(255,255,255,0.07);
+
+      border: 1px solid rgba(255,255,255,0.10);
     }
 
     h2 {
-      font-size: 21px;
-      letter-spacing: -.3px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: -0.3px;
     }
 
+
+    /* =========================
+       TEXT
+    ========================= */
+
     p {
-      color: var(--muted);
-      line-height: 1.75;
+      color: #a9abb7;
+
       font-size: 15px;
+      line-height: 1.8;
     }
+
+
+    /* =========================
+       LIST
+    ========================= */
 
     ul {
       list-style: none;
+
       display: grid;
-      gap: 12px;
+      gap: 13px;
     }
 
     li {
       position: relative;
-      padding-left: 27px;
 
-      color: var(--muted);
-      line-height: 1.65;
+      padding-left: 28px;
+
+      color: #a9abb7;
+
       font-size: 15px;
+      line-height: 1.7;
     }
 
     li::before {
       content: "✓";
 
       position: absolute;
+
       left: 0;
-      top: 2px;
+      top: 3px;
 
       width: 18px;
       height: 18px;
 
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       border-radius: 50%;
 
-      font-size: 11px;
-      color: #ddd6fe;
+      color: #c9c4ff;
 
-      background: rgba(139,92,246,.15);
-      border: 1px solid rgba(139,92,246,.25);
+      font-size: 10px;
+
+      background: rgba(120,100,255,0.12);
+
+      border: 1px solid rgba(120,100,255,0.22);
     }
+
+
+    /* =========================
+       SPECIAL CARDS
+    ========================= */
 
     .warning {
-      border-color: rgba(251,191,36,.2);
-      background: rgba(251,191,36,.045);
-    }
+      background: rgba(255,190,60,0.035);
 
-    .warning .icon {
-      background: rgba(251,191,36,.1);
-      border-color: rgba(251,191,36,.2);
+      border-color: rgba(255,190,60,0.13);
     }
 
     .telegram {
-      border-color: rgba(56,189,248,.2);
-      background: rgba(56,189,248,.04);
+      background: rgba(40,170,255,0.035);
+
+      border-color: rgba(40,170,255,0.13);
     }
 
-    .footer {
-      margin-top: 22px;
-      padding: 25px;
 
-      border-radius: 22px;
+    /* =========================
+       DIVIDER
+    ========================= */
+
+    .divider {
+      height: 1px;
+
+      margin: 22px 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,0.12),
+          transparent
+        );
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 18px;
+
+      padding: 25px 20px;
+
+      border-radius: 23px;
 
       text-align: center;
 
-      color: #777b89;
-      font-size: 13px;
-      line-height: 1.7;
-    }
+      color: #70727d;
 
-    .footer strong {
-      color: #c4b5fd;
-    }
-
-    .updated {
-      margin-top: 8px;
       font-size: 12px;
-      opacity: .7;
+
+      line-height: 1.8;
     }
 
-    @media (max-width: 650px) {
-      .page {
-        width: min(100% - 20px, 1100px);
-        padding: 25px 0;
+    footer strong {
+      color: #bdb9ff;
+      font-weight: 600;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: min(100% - 18px, 900px);
+
+        padding-top: 20px;
       }
 
       .hero {
-        padding: 40px 22px;
-        border-radius: 26px;
+        padding: 42px 20px;
+
+        border-radius: 27px;
       }
 
-      .card {
-        padding: 23px 20px;
-        border-radius: 21px;
+      .logo {
+        width: 72px;
+        height: 72px;
+
+        font-size: 32px;
+
+        border-radius: 22px;
       }
 
       h1 {
-        letter-spacing: -1.3px;
+        letter-spacing: -1.7px;
       }
 
       .subtitle {
-        font-size: 15px;
+        font-size: 14px;
+      }
+
+      .card {
+        padding: 24px 20px;
+
+        border-radius: 22px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      p,
+      li {
+        font-size: 14px;
       }
     }
 
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
-        animation: none !important;
+        scroll-behavior: auto !important;
         transition: none !important;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
+  <!-- Background -->
+  <div class="background">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+  </div>
 
-  <main class="page">
+
+  <main class="container">
+
 
     <!-- HERO -->
     <section class="hero glass">
 
-      <div class="logo">🌹</div>
+      <div class="logo">
+        🌹
+      </div>
 
       <h1>
-        <span class="gradient-text">
-          Save Restricted Content
-        </span>
+        Save Restricted Content
       </h1>
 
       <p class="subtitle">
         Responsible Use &amp; User Declaration
       </p>
 
-      <div class="badge">
-        <span class="dot"></span>
+      <div class="status">
+        <span class="status-dot"></span>
         Independent Third-Party Service
       </div>
 
     </section>
 
 
+    <!-- CONTENT -->
     <section class="content">
+
 
       <!-- ABOUT -->
       <article class="card glass">
 
-        <div class="card-header">
-          <div class="icon">ℹ️</div>
-          <h2>About the Service</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            ℹ️
+          </div>
+
+          <h2>
+            About the Service
+          </h2>
+
         </div>
 
         <p>
-          Save Restricted Content is an independent third-party Telegram
-          service. It is not affiliated with, endorsed by, or officially
-          associated with Telegram or Telegram Messenger LLP.
+          Save Restricted Content is an independent third-party
+          Telegram service. It is not affiliated with, endorsed by,
+          or officially associated with Telegram or Telegram
+          Messenger LLP.
         </p>
 
       </article>
@@ -435,19 +602,27 @@
       <!-- RESPONSIBLE USE -->
       <article class="card glass">
 
-        <div class="card-header">
-          <div class="icon">🛡️</div>
-          <h2>Responsible Use</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            🛡️
+          </div>
+
+          <h2>
+            Responsible Use
+          </h2>
+
         </div>
 
         <ul>
+
           <li>
             Use the service only for lawful and legitimate purposes.
           </li>
 
           <li>
-            Process only content that you are legally authorized to
-            access, download, copy, or retain.
+            Process only content that you are legally authorized
+            to access, download, copy, or retain.
           </li>
 
           <li>
@@ -471,30 +646,44 @@
           </li>
 
           <li>
-            You are responsible for ensuring that your use of the
-            service complies with applicable laws and platform rules.
+            You are responsible for ensuring that your use complies
+            with applicable laws and platform rules.
           </li>
+
         </ul>
 
       </article>
 
 
-      <!-- CONTENT -->
+      <!-- COPYRIGHT -->
       <article class="card glass warning">
 
-        <div class="card-header">
-          <div class="icon">⚠️</div>
-          <h2>Content &amp; Copyright</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            ⚠️
+          </div>
+
+          <h2>
+            Content &amp; Copyright
+          </h2>
+
         </div>
 
         <p>
           The service does not grant ownership or additional rights
-          to any content processed through it. Processing content does
-          not constitute permission from the content owner to reproduce,
-          redistribute, publish, or commercially exploit that content.
+          to any content processed through it.
         </p>
 
-        <br>
+        <div class="divider"></div>
+
+        <p>
+          Processing content through the service does not constitute
+          permission from the content owner to reproduce, redistribute,
+          publish, or commercially exploit that content.
+        </p>
+
+        <div class="divider"></div>
 
         <p>
           If you do not have the necessary rights or authorization
@@ -508,18 +697,25 @@
       <!-- PRIVACY -->
       <article class="card glass">
 
-        <div class="card-header">
-          <div class="icon">🔐</div>
-          <h2>Privacy &amp; Security</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            🔐
+          </div>
+
+          <h2>
+            Privacy &amp; Security
+          </h2>
+
         </div>
 
         <p>
           We aim to collect and retain only information reasonably
-          necessary to operate the service. Users should never submit
-          passwords, authentication codes, payment credentials,
-          or other sensitive information unless specifically required
-          by a legitimate feature and handled through an appropriate
-          secure mechanism.
+          necessary to operate the service. Users should avoid
+          submitting passwords, authentication codes, payment
+          credentials, or other sensitive information unless
+          specifically required by a legitimate feature and handled
+          through an appropriate secure mechanism.
         </p>
 
       </article>
@@ -528,18 +724,25 @@
       <!-- TELEGRAM -->
       <article class="card glass telegram">
 
-        <div class="card-header">
-          <div class="icon">✈️</div>
-          <h2>Telegram Relationship</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            ✈️
+          </div>
+
+          <h2>
+            Telegram Relationship
+          </h2>
+
         </div>
 
         <p>
           Save Restricted Content is an independent service.
-          Telegram trademarks, APIs, and services remain the property
-          of their respective owners.
+          Telegram trademarks, APIs, and services remain the
+          property of their respective owners.
         </p>
 
-        <br>
+        <div class="divider"></div>
 
         <p>
           Nothing in this declaration represents that Telegram has
@@ -552,9 +755,16 @@
       <!-- COMPLIANCE -->
       <article class="card glass">
 
-        <div class="card-header">
-          <div class="icon">✓</div>
-          <h2>Compliance</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            ✓
+          </div>
+
+          <h2>
+            Compliance
+          </h2>
+
         </div>
 
         <p>
@@ -570,36 +780,48 @@
       <!-- AGREEMENT -->
       <article class="card glass">
 
-        <div class="card-header">
-          <div class="icon">🤝</div>
-          <h2>User Agreement</h2>
+        <div class="card-title">
+
+          <div class="icon">
+            🤝
+          </div>
+
+          <h2>
+            User Agreement
+          </h2>
+
         </div>
 
         <p>
           By using Save Restricted Content, you acknowledge and agree
           to use the service responsibly and in accordance with
-          applicable laws, Telegram's applicable rules, and the rights
-          of content owners and other users.
+          applicable laws, Telegram's applicable rules, and the
+          rights of content owners and other users.
         </p>
 
       </article>
 
+
     </section>
 
 
-    <footer class="footer glass">
+    <!-- FOOTER -->
+    <footer class="glass">
 
-      <strong>Save Restricted Content</strong>
+      <strong>
+        Save Restricted Content
+      </strong>
 
-      <div>
-        Independent third-party service • Not affiliated with Telegram
-      </div>
+      <br>
 
-      <div class="updated">
-        © 2026 Save Restricted Content. All rights reserved.
-      </div>
+      Independent third-party service · Not affiliated with Telegram
+
+      <br>
+
+      © 2026 Save Restricted Content. All rights reserved.
 
     </footer>
+
 
   </main>
 
