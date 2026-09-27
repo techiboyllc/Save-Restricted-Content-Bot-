@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Save Restricted Content — User Declaration</title>
+
+  <meta
+    name="description"
+    content="Save Restricted Content — Responsible Use and User Declaration"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #07080d;
+      --glass: rgba(255, 255, 255, 0.075);
+      --glass-strong: rgba(255, 255, 255, 0.11);
+      --border: rgba(255, 255, 255, 0.16);
+      --text: #f7f7fa;
+      --muted: #a7a9b5;
+      --accent: #8b5cf6;
+      --accent-2: #ec4899;
+      --green: #34d399;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, .22), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(236, 72, 153, .18), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(59, 130, 246, .15), transparent 35%),
+        var(--bg);
+
+      overflow-x: hidden;
+    }
+
+    /* Animated ambient lights */
+    .orb {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .35;
+      pointer-events: none;
+      z-index: -1;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      background: #8b5cf6;
+      top: 5%;
+      left: -100px;
+    }
+
+    .orb.two {
+      background: #ec4899;
+      right: -100px;
+      top: 35%;
+      animation-delay: -4s;
+    }
+
+    .orb.three {
+      background: #2563eb;
+      bottom: -100px;
+      left: 40%;
+      animation-delay: -8s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(30px, -40px, 0) scale(1.12);
+      }
+    }
+
+    .page {
+      width: min(1100px, calc(100% - 32px));
+      margin: auto;
+      padding: 60px 0;
+    }
+
+    /* Glass */
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      padding: 55px 45px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.10),
+          transparent 35%,
+          rgba(255,255,255,.03)
+        );
+      pointer-events: none;
+    }
+
+    .logo {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 24px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 24px;
+
+      font-size: 40px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139,92,246,.35),
+          rgba(236,72,153,.25)
+        );
+
+      border: 1px solid rgba(255,255,255,.2);
+
+      box-shadow:
+        0 15px 45px rgba(139,92,246,.25),
+        inset 0 1px 0 rgba(255,255,255,.2);
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 58px);
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #c4b5fd,
+          #f9a8d4
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-top: 28px;
+      padding: 9px 15px;
+
+      border-radius: 999px;
+
+      font-size: 13px;
+      color: #d1fae5;
+
+      background: rgba(52, 211, 153, .08);
+      border: 1px solid rgba(52, 211, 153, .2);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .content {
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: 24px;
+      padding: 30px;
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      background: var(--glass-strong);
+      border-color: rgba(255,255,255,.23);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 17px;
+    }
+
+    .icon {
+      width: 43px;
+      height: 43px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background: rgba(139,92,246,.12);
+      border: 1px solid rgba(139,92,246,.2);
+
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-size: 21px;
+      letter-spacing: -.3px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 27px;
+
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    li::before {
+      content: "✓";
+
+      position: absolute;
+      left: 0;
+      top: 2px;
+
+      width: 18px;
+      height: 18px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      font-size: 11px;
+      color: #ddd6fe;
+
+      background: rgba(139,92,246,.15);
+      border: 1px solid rgba(139,92,246,.25);
+    }
+
+    .warning {
+      border-color: rgba(251,191,36,.2);
+      background: rgba(251,191,36,.045);
+    }
+
+    .warning .icon {
+      background: rgba(251,191,36,.1);
+      border-color: rgba(251,191,36,.2);
+    }
+
+    .telegram {
+      border-color: rgba(56,189,248,.2);
+      background: rgba(56,189,248,.04);
+    }
+
+    .footer {
+      margin-top: 22px;
+      padding: 25px;
+
+      border-radius: 22px;
+
+      text-align: center;
+
+      color: #777b89;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .footer strong {
+      color: #c4b5fd;
+    }
+
+    .updated {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: .7;
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        width: min(100% - 20px, 1100px);
+        padding: 25px 0;
+      }
+
+      .hero {
+        padding: 40px 22px;
+        border-radius: 26px;
+      }
+
+      .card {
+        padding: 23px 20px;
+        border-radius: 21px;
+      }
+
+      h1 {
+        letter-spacing: -1.3px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero glass">
+
+      <div class="logo">🌹</div>
+
+      <h1>
+        <span class="gradient-text">
+          Save Restricted Content
+        </span>
+      </h1>
+
+      <p class="subtitle">
+        Responsible Use &amp; User Declaration
+      </p>
+
+      <div class="badge">
+        <span class="dot"></span>
+        Independent Third-Party Service
+      </div>
+
+    </section>
+
+
+    <section class="content">
+
+      <!-- ABOUT -->
+      <article class="card glass">
+
+        <div class="card-header">
+          <div class="icon">ℹ️</div>
+          <h2>About the Service</h2>
+        </div>
+
+        <p>
+          Save Restricted Content is an independent third-party Telegram
+          service. It is not affiliated with, endorsed by, or officially
+          associated with Telegram or Telegram Messenger LLP.
+        </p>
+
+      </article>
+
+
+      <!-- RESPONSIBLE USE -->
+      <article class="card glass">
+
+        <div class="card-header">
+          <div class="icon">🛡️</div>
+          <h2>Responsible Use</h2>
+        </div>
+
+        <ul>
+          <li>
+            Use the service only for lawful and legitimate purposes.
+          </li>
+
+          <li>
+            Process only content that you are legally authorized to
+            access, download, copy, or retain.
+          </li>
+
+          <li>
+            Respect copyright, privacy, intellectual-property,
+            and other rights of third parties.
+          </li>
+
+          <li>
+            Do not distribute or commercially exploit copyrighted
+            material without appropriate authorization.
+          </li>
+
+          <li>
+            Do not use the service for spam, fraud, malware,
+            harassment, or other unlawful activities.
+          </li>
+
+          <li>
+            Do not interfere with Telegram's systems, security,
+            moderation mechanisms, or technical limitations.
+          </li>
+
+          <li>
+            You are responsible for ensuring that your use of the
+            service complies with applicable laws and platform rules.
+          </li>
+        </ul>
+
+      </article>
+
+
+      <!-- CONTENT -->
+      <article class="card glass warning">
+
+        <div class="card-header">
+          <div class="icon">⚠️</div>
+          <h2>Content &amp; Copyright</h2>
+        </div>
+
+        <p>
+          The service does not grant ownership or additional rights
+          to any content processed through it. Processing content does
+          not constitute permission from the content owner to reproduce,
+          redistribute, publish, or commercially exploit that content.
+        </p>
+
+        <br>
+
+        <p>
+          If you do not have the necessary rights or authorization
+          to use particular content, do not process or distribute
+          that content through the service.
+        </p>
+
+      </article>
+
+
+      <!-- PRIVACY -->
+      <article class="card glass">
+
+        <div class="card-header">
+          <div class="icon">🔐</div>
+          <h2>Privacy &amp; Security</h2>
+        </div>
+
+        <p>
+          We aim to collect and retain only information reasonably
+          necessary to operate the service. Users should never submit
+          passwords, authentication codes, payment credentials,
+          or other sensitive information unless specifically required
+          by a legitimate feature and handled through an appropriate
+          secure mechanism.
+        </p>
+
+      </article>
+
+
+      <!-- TELEGRAM -->
+      <article class="card glass telegram">
+
+        <div class="card-header">
+          <div class="icon">✈️</div>
+          <h2>Telegram Relationship</h2>
+        </div>
+
+        <p>
+          Save Restricted Content is an independent service.
+          Telegram trademarks, APIs, and services remain the property
+          of their respective owners.
+        </p>
+
+        <br>
+
+        <p>
+          Nothing in this declaration represents that Telegram has
+          reviewed, approved, sponsored, or endorsed this service.
+        </p>
+
+      </article>
+
+
+      <!-- COMPLIANCE -->
+      <article class="card glass">
+
+        <div class="card-header">
+          <div class="icon">✓</div>
+          <h2>Compliance</h2>
+        </div>
+
+        <p>
+          We reserve the right to restrict or terminate access to
+          the service where necessary to comply with applicable law,
+          valid rights-holder requests, platform requirements,
+          or our safety and abuse-prevention policies.
+        </p>
+
+      </article>
+
+
+      <!-- AGREEMENT -->
+      <article class="card glass">
+
+        <div class="card-header">
+          <div class="icon">🤝</div>
+          <h2>User Agreement</h2>
+        </div>
+
+        <p>
+          By using Save Restricted Content, you acknowledge and agree
+          to use the service responsibly and in accordance with
+          applicable laws, Telegram's applicable rules, and the rights
+          of content owners and other users.
+        </p>
+
+      </article>
+
+    </section>
+
+
+    <footer class="footer glass">
+
+      <strong>Save Restricted Content</strong>
+
+      <div>
+        Independent third-party service • Not affiliated with Telegram
+      </div>
+
+      <div class="updated">
+        © 2026 Save Restricted Content. All rights reserved.
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+</html>
